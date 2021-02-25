@@ -1,19 +1,17 @@
 package com.company;
 
-import com.company.Observer.MessageStream;
-import com.company.Observer.Observer;
-import com.company.Observer.PhoneClient;
-import com.company.Observer.Subject;
-
 public class Main {
 
     public static void main(String[] args) {
-        Subject subject = new MessageStream();
+        Publisher publisher = new Publisher();
 
-        Observer phoneClient = new PhoneClient(subject);
-        //  Will double as the observer added itself to the invocation list in its constructor
-        subject.attach(phoneClient);
+        publisher.register(s -> System.out.println("Subscriber 1: " + s));
+        publisher.register(s -> System.out.println("Subscriber 2: " + s));
+        publisher.register(s -> System.out.println("Subscriber 3: " + s));
+        publisher.register(s -> System.out.println("Subscriber 4: " + s));
+        publisher.register(s -> System.out.println("Subscriber 5: " + s));
 
-        subject.setState("Message being broadcast!");
+        publisher.announce();
+        publisher.announce();
     }
 }
