@@ -1,18 +1,14 @@
 package com.company.Strategy;
 
+import java.util.function.Predicate;
+
 public class Customer {
     private int creditScore;
     private double creditRatio;
     private int creditHistory;
 
-    private ApprovalStrategy strategy;
-
-    public Customer(ApprovalStrategy strategy) {
-        this.strategy = strategy;
-    }
-
-    public boolean isApproved() {
-        return this.strategy.isApproved(this);
+    public boolean isApproved(Predicate<Customer> strategy) {
+        return strategy.test(this);
     }
 
     public int getCreditScore() {
